@@ -1,5 +1,6 @@
 const visualizer = require('./visualizer');
 const playlist = require('./playlist');
+const meta = require('./meta');
 
 let currentAudio = null;
 
@@ -14,6 +15,12 @@ const createStruct = (element, item) => {
       return;
     }
     const li = document.createElement('li');
+    if (item.name.split('.').pop() === 'mp3') {
+      meta.detect(item.path)
+      .then((data) => {
+        li.innerHTML = '<span class="label">' + data.artist.join(', ') + ' - ' + data.title + '</span>';
+      });
+    }
     li.innerHTML = '<span class="label">' + item.name + '</span>';
     li.setAttribute('data-path', item.path);
     element.appendChild(li);
