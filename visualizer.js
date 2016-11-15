@@ -1,4 +1,5 @@
 const Rainbow = require('rainbowvis.js');
+const ctx = new AudioContext();
 
 const setDisplay = () => {
   const canvas = document.querySelector('canvas');
@@ -24,7 +25,6 @@ const setDisplay = () => {
 
 const start = (src) => {
   const display = setDisplay();
-  var ctx = new AudioContext();
   var audio = new Audio(src);
   var audioSrc = ctx.createMediaElementSource(audio);
   var analyser = ctx.createAnalyser();
