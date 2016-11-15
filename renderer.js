@@ -1,6 +1,7 @@
 const visualizer = require('./visualizer');
 const playlist = require('./playlist');
 const meta = require('./meta');
+const {dialog} = require('electron').remote;
 
 let currentAudio = null;
 
@@ -30,9 +31,11 @@ const createStruct = (element, item) => {
       createStruct(ul, item);
     }
   });
-};
 
-createStruct(domList, playlist.fileTree());
+  document.querySelectorAll('.file-tree li').forEach((el) => {
+    el.addEventListener('click', clickItem, false);
+  });
+};
 
 const clickItem = function(event) {
   event.stopPropagation();
@@ -53,6 +56,16 @@ const clickItem = function(event) {
   currentAudio = visualizer.start(path);
 };
 
+const selectMusicFolder = function() {
+  const [path] = dialog.showOpenDialog({
+      properties: ['openDirectory']
+  });
+
+  domList.innerHTML = '';
+
+  createStruct(domList, playlist.fileTree(path + '/'));
+};
+
 document.querySelector('canvas').addEventListener('click', function() {
   if (!currentAudio) {
     return;
@@ -61,6 +74,4 @@ document.querySelector('canvas').addEventListener('click', function() {
   currentAudio.isPaused() ? currentAudio.play() : currentAudio.pause();
 }, false);
 
-document.querySelectorAll('.file-tree li').forEach((el) => {
-  el.addEventListener('click', clickItem, false);
-});
+document.querySelector('.open-folder').addEventListener('click', selectMusicFolder, false);
