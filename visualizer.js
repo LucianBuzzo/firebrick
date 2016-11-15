@@ -25,6 +25,7 @@ const setDisplay = () => {
 
 const start = (src) => {
   const display = setDisplay();
+  var isPaused = false;
   var audio = new Audio(src);
   var audioSrc = ctx.createMediaElementSource(audio);
   var analyser = ctx.createAnalyser();
@@ -43,12 +44,25 @@ const start = (src) => {
     // update data in frequencyData
     analyser.getByteFrequencyData(frequencyData);
     // render frame based on values in frequencyData
-    display.draw(frequencyData);
+    if (!isPaused) {
+      display.draw(frequencyData);
+    }
   }
   audio.play();
   renderFrame();
 
-  return audio;
+  return {
+    stop: () => audio.pause(),
+    pause: () => {
+      isPaused = true;
+      audio.pause();
+    },
+    play: () => {
+      isPaused = false;
+      audio.play();
+    },
+    isPaused: () => isPaused,
+  };
 };
 
 module.exports = {

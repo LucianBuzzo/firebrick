@@ -48,10 +48,18 @@ const clickItem = function(event) {
   document.querySelector('.title').innerText = this.innerText;
 
   if (currentAudio) {
-    currentAudio.pause();
+    currentAudio.stop();
   }
   currentAudio = visualizer.start(path);
 };
+
+document.querySelector('canvas').addEventListener('click', function() {
+  if (!currentAudio) {
+    return;
+  }
+
+  currentAudio.isPaused() ? currentAudio.play() : currentAudio.pause();
+}, false);
 
 document.querySelectorAll('.file-tree li').forEach((el) => {
   el.addEventListener('click', clickItem, false);
