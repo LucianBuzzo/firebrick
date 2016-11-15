@@ -1,3 +1,4 @@
+const storage = require('electron-json-storage');
 const visualizer = require('./visualizer');
 const playlist = require('./playlist');
 const meta = require('./meta');
@@ -61,6 +62,8 @@ const selectMusicFolder = function() {
       properties: ['openDirectory']
   });
 
+  storage.set('folderPath', path);
+
   domList.innerHTML = '';
 
   createStruct(domList, playlist.fileTree(path + '/'));
@@ -75,3 +78,17 @@ document.querySelector('canvas').addEventListener('click', function() {
 }, false);
 
 document.querySelector('.open-folder').addEventListener('click', selectMusicFolder, false);
+
+const init = () => {
+  storage.get('folderPath', function(error, path) {
+    if (error) {
+      throw error;
+    }
+
+    if (typeof path === 'string') {
+      createStruct(domList, playlist.fileTree(path + '/'));
+    }
+  });
+};
+
+init();
