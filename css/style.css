@@ -12,17 +12,3 @@ svg {
 .mask {
   position: absolute;
 }
-
-.visualizer {
-  width: 1040px;
-  height: 300px;
-}
-
-.visualizer span {
-  display: block;
-  min-height: 1px !important;
-  float: left;
-  border-bottom: 2px solid black;
-  width: 1px;
-  background: green;
-}

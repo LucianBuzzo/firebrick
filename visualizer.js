@@ -1,18 +1,22 @@
-const setDisplay = () => {
-  const wrapper = document.querySelector('.visualizer');
-  var bars = [];
-  var i;
-  for (i = 0; i < 1024; i++) {
-    bars.push(document.createElement('span'));
-    wrapper.appendChild(bars[i]);
-  }
+const Rainbow = require('rainbowvis.js');
 
-  bars[4].style.height = '20px';
+const setDisplay = () => {
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const height = 300;
+  const colors = new Rainbow();
+  colors.setNumberRange(0, 255);
+  colors.setSpectrum('yellow', 'red');
+  canvas.width = 1024;
+  canvas.height = height;
 
   return {
     draw: (frequencyData) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       frequencyData.forEach((val, index) => {
-        bars[index].style.height = val / 3 + 'px';
+        ctx.fillStyle = '#' + colors.colourAt(index / 8 + val / 2);
+        ctx.fillRect(index, height - val / 2, 1, val / 2);
       });
     }
   };
