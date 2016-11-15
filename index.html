@@ -8,16 +8,14 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
-  <canvas class="visualizer"></canvas>
+    <div class="section">
+      <canvas class="visualizer"></canvas>
+      <ul class="file-tree"></ul>
+    </div>
 
-  <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
-  </script>
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
 </html>

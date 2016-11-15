@@ -12,3 +12,14 @@ svg {
 .mask {
   position: absolute;
 }
+
+.file-tree ul {
+  padding-left: 30px;
+  display: none;
+}
+
+.file-tree .label:hover {
+  color: white;
+  background: black;
+  cursor: pointer;
+}
