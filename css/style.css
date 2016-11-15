@@ -1,16 +1,13 @@
-.image-wrapper {
-  position: relative;
+html,
+body {
+  background: white;
 }
 
-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1
-}
-
-.mask {
-  position: absolute;
+.brand {
+  color: firebrick;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
 }
 
 .folder-controls,
@@ -33,4 +30,15 @@ canvas {
   display: block;
   width: 1024px;
   height: 200px;
+}
+
+.card {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
 }
