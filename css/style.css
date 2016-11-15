@@ -13,6 +13,10 @@ svg {
   position: absolute;
 }
 
+.file-tree {
+  margin-top: 50px;
+}
+
 .file-tree ul {
   padding-left: 30px;
   display: none;
@@ -22,4 +26,10 @@ svg {
   color: white;
   background: black;
   cursor: pointer;
+}
+
+canvas {
+  display: block;
+  width: 1024px;
+  height: 200px;
 }

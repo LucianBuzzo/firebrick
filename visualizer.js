@@ -3,7 +3,7 @@ const Rainbow = require('rainbowvis.js');
 const setDisplay = () => {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
-  const height = 300;
+  const height = 200;
   const colors = new Rainbow();
   colors.setNumberRange(0, 255);
   colors.setSpectrum('yellow', 'red');
@@ -47,6 +47,8 @@ const start = (src) => {
   }
   audio.play();
   renderFrame();
+
+  return audio;
 };
 
 module.exports = {

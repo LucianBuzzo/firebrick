@@ -1,6 +1,8 @@
 const visualizer = require('./visualizer');
 const playlist = require('./playlist');
 
+let currentAudio = null;
+
 const domList = document.querySelector('.file-tree');
 
 const createStruct = (element, item) => {
@@ -35,8 +37,13 @@ const clickItem = function(event) {
   }
 
   let path = this.getAttribute('data-path');
-  console.log(path);
-  visualizer.start(path);
+
+  document.querySelector('.title').innerText = this.innerText;
+
+  if (currentAudio) {
+    currentAudio.pause();
+  }
+  currentAudio = visualizer.start(path);
 };
 
 document.querySelectorAll('.file-tree li').forEach((el) => {
