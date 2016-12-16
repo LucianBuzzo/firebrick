@@ -15,15 +15,16 @@
         <canvas class="visualizer"></canvas>
       </div>
 
-      <div class="card is-fullwidth browser" ng-controller="TrackListController">
+      <div class="card is-fullwidth browser" ng-controller="TrackBrowserController">
         <div class="search-bar">
-          <input type="text">
+          <form ng-submit="searchSubmit()">
+            <input class="input" type="text" ng-model="searchTerm" name="text" placeholder="Search for a youtube video">
+          </form>
         </div>
 
         <ul>
           <li ng-repeat="track in tracks">
-            <span>{{track.name}}</span>
-            <p>{{track.snippet}}</p>
+            <a href="#" ng-click="playTrack(track)">{{track.title}}</a>
           </li>
         </ul>
 
