@@ -34,6 +34,7 @@ canvas {
 
 .card {
   position: relative;
+  margin-bottom: 30px;
 }
 
 .title {
@@ -41,4 +42,8 @@ canvas {
   z-index: 1;
   top: 10px;
   left: 10px;
+}
+
+.browser {
+  padding: 15px;
 }
