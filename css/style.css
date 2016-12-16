@@ -10,20 +10,12 @@ body {
   margin-bottom: 15px;
 }
 
-.folder-controls,
-.file-tree {
+.folder-controls {
   margin-top: 50px;
 }
 
-.file-tree ul {
+.local-browser ul ul {
   padding-left: 30px;
-  display: none;
-}
-
-.file-tree .label:hover {
-  color: white;
-  background: black;
-  cursor: pointer;
 }
 
 canvas {
