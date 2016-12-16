@@ -10,20 +10,13 @@ body {
   margin-bottom: 15px;
 }
 
-.folder-controls,
-.file-tree {
-  margin-top: 50px;
+.folder-controls {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-.file-tree ul {
+.local-browser ul ul {
   padding-left: 30px;
-  display: none;
-}
-
-.file-tree .label:hover {
-  color: white;
-  background: black;
-  cursor: pointer;
 }
 
 canvas {
@@ -34,6 +27,7 @@ canvas {
 
 .card {
   position: relative;
+  margin-bottom: 30px;
 }
 
 .title {
@@ -42,3 +36,26 @@ canvas {
   top: 10px;
   left: 10px;
 }
+
+.browser {
+  padding: 15px;
+  min-height: 250px;
+}
+
+.search-bar {
+  position: relative;
+  padding-right: 100px;
+}
+
+.browser-library-selection {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.browser-library-selection select {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+

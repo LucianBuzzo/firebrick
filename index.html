@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="firebrickApp">
   <head>
     <meta charset="UTF-8">
     <title>FireBrick</title>
@@ -14,15 +14,58 @@
         <h2 class="title"></h2>
         <canvas class="visualizer"></canvas>
       </div>
-      <div class="folder-controls">
-        <button class="button is-primary open-folder">Open music libary</button>
+
+      <div class="card is-fullwidth browser" ng-controller="TrackBrowserController">
+        <div class="search-bar">
+          <form ng-submit="searchSubmit()">
+            <input class="input" type="text" ng-model="searchTerm" name="text" placeholder="Search for a song">
+
+            <p class="control browser-library-selection">
+              <span class="select">
+                <select ng-model="browserLibrary" ng-change="browserLibraryChange()">
+                  <option value="youtube">Youtube</option>
+                  <option value="local">Local folder</option>
+                </select>
+              </span>
+            </p>
+          </form>
+        </div>
+
+        <div ng-if="browserLibrary === 'local'" class="local-browser">
+          <div class="folder-controls">
+            <button ng-click="selectMusicFolder()" class="button is-primary open-folder">Open music libary</button>
+          </div>
+
+          <ul>
+            <li ng-repeat="item in folderTree.children" ng-include="'tree_item_renderer.html'"></li>
+          </ul>
+        </div>
+
+        <div ng-if="browserLibrary !== 'local'" class="local-browser">
+          <ul>
+            <li ng-repeat="track in tracks">
+              <a href="#" ng-click="playYoutubeTrack(track)">{{track.title}}</a>
+            </li>
+          </ul>
+        </div>
+
       </div>
-      <ul class="file-tree"></ul>
+
+      <div id="youtube-container" style="display: none">
+      </div>
     </div>
+
+    <script type="text/ng-template"  id="tree_item_renderer.html">
+      <a href="#" ng-click="playLocalTrack(item)" ng-if="!item.children.length">{{item.name}}</a>
+      <span ng-if="item.children.length">{{item.name}}</span>
+      <ul>
+        <li ng-repeat="item in item.children" ng-include="'tree_item_renderer.html'"></li>
+      </ul>
+    </script>
 
     <script>
       // You can also require other files to run in this process
-      require('./renderer.js')
+      require('./lib/renderer.js')
     </script>
   </body>
 </html>
