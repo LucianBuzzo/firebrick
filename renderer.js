@@ -9,7 +9,7 @@ let currentAudio = null;
 const domList = document.querySelector('.file-tree');
 
 const createStruct = (element, item) => {
-  if (!item.children) {
+  if (!item || !item.children) {
     return;
   }
   item.children.forEach((item) => {
@@ -54,7 +54,10 @@ const clickItem = function(event) {
   if (currentAudio) {
     currentAudio.stop();
   }
-  currentAudio = visualizer.start(path);
+
+  var audio = new Audio(path);
+
+  currentAudio = visualizer.start(audio);
 };
 
 const selectMusicFolder = function() {
@@ -92,3 +95,17 @@ const init = () => {
 };
 
 init();
+
+const loadVid = () => {
+  let source = document.querySelector('iframe')
+  .contentWindow.document.querySelector('video');
+
+  if (source) {
+    console.log('loaded!');
+    visualizer.start(source);
+  } else {
+    setTimeout(loadVid, 500);
+  }
+};
+
+loadVid();

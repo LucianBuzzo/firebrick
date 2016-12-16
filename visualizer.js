@@ -23,11 +23,11 @@ const setDisplay = () => {
   };
 };
 
-const start = (src) => {
+const start = (source, type = 'audio') => {
+  console.log(source);
   const display = setDisplay();
   var isPaused = false;
-  var audio = new Audio(src);
-  var audioSrc = ctx.createMediaElementSource(audio);
+  var audioSrc = ctx.createMediaElementSource(source);
   var analyser = ctx.createAnalyser();
   // we have to connect the MediaElementSource with the analyser
   audioSrc.connect(analyser);
@@ -39,7 +39,7 @@ const start = (src) => {
 
   // we're ready to receive some data!
   // loop
-  function renderFrame() {
+  const renderFrame = function renderFrame() {
     requestAnimationFrame(renderFrame);
     // update data in frequencyData
     analyser.getByteFrequencyData(frequencyData);
@@ -47,22 +47,41 @@ const start = (src) => {
     if (!isPaused) {
       display.draw(frequencyData);
     }
-  }
-  audio.play();
+  };
+
   renderFrame();
 
-  return {
-    stop: () => audio.pause(),
-    pause: () => {
-      isPaused = true;
-      audio.pause();
-    },
-    play: () => {
-      isPaused = false;
-      audio.play();
-    },
-    isPaused: () => isPaused,
-  };
+  if (type === 'audio') {
+    source.play();
+
+    return {
+      stop: () => source.pause(),
+      pause: () => {
+        isPaused = true;
+        source.pause();
+      },
+      play: () => {
+        isPaused = false;
+        source.play();
+      },
+      isPaused: () => isPaused,
+    };
+  } else if (type === 'youtube') {
+    source.click();
+
+    return {
+      stop: () => isPaused ? '' : source.click(),
+      pause: () => {
+        isPaused = true;
+        source.click();
+      },
+      play: () => {
+        isPaused = false;
+        source.click();
+      },
+      isPaused: () => isPaused,
+    };
+  }
 };
 
 module.exports = {
