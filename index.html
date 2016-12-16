@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="firebrickApp">
   <head>
     <meta charset="UTF-8">
     <title>FireBrick</title>
@@ -15,10 +15,18 @@
         <canvas class="visualizer"></canvas>
       </div>
 
-      <div class="card is-fullwidth browser">
+      <div class="card is-fullwidth browser" ng-controller="TrackListController">
         <div class="search-bar">
           <input type="text">
         </div>
+
+        <ul>
+          <li ng-repeat="track in tracks">
+            <span>{{track.name}}</span>
+            <p>{{track.snippet}}</p>
+          </li>
+        </ul>
+
       </div>
 
       <div id="youtube-container">
