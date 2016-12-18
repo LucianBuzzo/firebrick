@@ -17,9 +17,15 @@
 
       <div class="columns">
         <div class="column">
-          <div class="card is-fullwidth playlist">
+          <div class="card is-fullwidth playlist" ng-controller="PlaylistController">
             <h2 class="subtitle">Playlist</h2>
             <hr>
+
+            <ul>
+              <li ng-repeat="track in playlist">
+                <a href="#" class="playlist-track" ng-click="playYoutubeTrack(track)">{{track.name}}</a>
+              </li>
+            </ul>
           </div>
         </div>
 
