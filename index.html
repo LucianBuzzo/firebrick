@@ -22,8 +22,8 @@
             <hr>
 
             <ul>
-              <li ng-repeat="track in playlist">
-                <a href="#" class="playlist-track" ng-click="playYoutubeTrack(track)">{{track.name}}</a>
+              <li ng-repeat="track in playlist track by $index">
+              <a href="#" data-path="{{track.path}}" class="playlist-track" ng-click="playTrack(track)">{{track.name}}</a>
               </li>
             </ul>
           </div>
@@ -59,7 +59,7 @@
             <div ng-if="browserLibrary !== 'local'" class="local-browser">
               <ul>
                 <li ng-repeat="track in tracks">
-                  <a href="#" class="browser-track" ng-click="playYoutubeTrack(track)">{{track.name}}</a>
+                  <a href="#" class="browser-track" data-path="{{track.path}}" ng-click="playYoutubeTrack(track)">{{track.name}}</a>
                 </li>
               </ul>
             </div>
@@ -72,7 +72,7 @@
     </div>
 
     <script type="text/ng-template"  id="tree_item_renderer.html">
-      <a href="#" class="browser-track" ng-click="playLocalTrack(item)" ng-if="!item.children.length">{{item.name}}</a>
+      <a href="#" data-path="{{item.path}}" class="browser-track" ng-click="playLocalTrack(item)" ng-if="!item.children.length">{{item.name}}</a>
       <span ng-if="item.children.length">{{item.name}}</span>
       <ul>
         <li ng-repeat="item in item.children" ng-include="'tree_item_renderer.html'"></li>
