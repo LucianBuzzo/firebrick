@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -30,6 +32,8 @@
     "rainbowvis.js": "^1.0.1",
     "remote": "^0.2.6",
     "request": "^2.79.0",
-    "uuid": "^3.0.1"
-  }
+    "uuid": "^3.0.1",
+    "snyk": "^1.316.2"
+  },
+  "snyk": true
 }
