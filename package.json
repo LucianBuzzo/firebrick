@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "angular": "^1.6.0",
-    "cheerio": "^0.22.0",
+    "cheerio": "^1.0.0",
     "directory-tree": "^1.1.1",
     "electron-context-menu": "^1.0.0",
     "electron-json-storage": "^2.1.0",
